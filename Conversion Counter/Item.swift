@@ -10,9 +10,13 @@ import SwiftData
 
 @Model
 final class Item {
-    var timestamp: Date
+    var convType: String
+    var itemName: String
+    var date: String
     
-    init(timestamp: Date) {
-        self.timestamp = timestamp
+    init(convType: String, itemName: String, date: String) {
+        self.convType = convType
+        self.itemName = itemName
+        self.date = date
     }
 }

@@ -35,16 +35,6 @@
 			path = "Conversion Counter";
 			sourceTree = "<group>";
 		};
-		52A396312EC6887200373408 /* Conversion CounterTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Conversion CounterTests";
-			sourceTree = "<group>";
-		};
-		52A3963B2EC6887200373408 /* Conversion CounterUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Conversion CounterUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				52A396212EC6887100373408 /* Conversion Counter */,
-				52A396312EC6887200373408 /* Conversion CounterTests */,
-				52A3963B2EC6887200373408 /* Conversion CounterUITests */,
 				52A396202EC6887100373408 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				52A396302EC6887200373408 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				52A396312EC6887200373408 /* Conversion CounterTests */,
-			);
 			name = "Conversion CounterTests";
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				52A3963A2EC6887200373408 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				52A3963B2EC6887200373408 /* Conversion CounterUITests */,
 			);
 			name = "Conversion CounterUITests";
 			packageProductDependencies = (
@@ -195,6 +177,8 @@
 			);
 			mainGroup = 52A396162EC6887100373408;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 52A396202EC6887100373408 /* Products */;
 			projectDirPath = "";
@@ -398,6 +382,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -442,6 +427,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
