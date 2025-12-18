@@ -11,7 +11,8 @@ import SwiftData
 struct InputView: View {
     @Environment(\.modelContext) private var context
 
-    @State private var typeOfConversion = "Conversion Type"
+    @State private var typeOfConversion = "Accessory"
+    @State private var typeOfInput = "Conversion"
     @State private var itemPurchased = ""
     @State private var date = Date.now.formatted(
         .dateTime
@@ -22,37 +23,77 @@ struct InputView: View {
     @State private var itemAdded = false
     @State private var toastOpacity = 1.0
     @State private var showError = false
+    @State private var numAppointments = ""
+    @FocusState private var fieldIsFocused: Bool
+    
     
     var body: some View {
         ZStack {
             VStack {
-                Text("Input Conversion")
+                Text("Input")
                     .font(.largeTitle)
-                Picker("Conversion Type", selection: $typeOfConversion) {
-                    Text("Conversion Type").tag("Conversion Type")
-                    Text("Accessory").tag("Accessory")
-                    Text("Trade-In").tag("Trade-In")
-                    Text("Upgrade").tag("Upgrade")
-                }
-                .pickerStyle(.menu)
-                TextField("Enter purchased item", text: $itemPurchased)
-                    .padding()
-                    .multilineTextAlignment(.center)
-                    .autocorrectionDisabled(true)
-                Button("Add item") {
-                    if typeOfConversion == "Conversion Type" || itemPurchased.isEmpty {
-                        showError = true
-                        toastOpacity = 1.0
-                    } else {
-                        let newItem = Item(convType: typeOfConversion, itemName: itemPurchased, date: date)
-                        context.insert(newItem)
-                        print("Sold \(itemPurchased) in category \(typeOfConversion) on \(date)")
-                        itemPurchased = ""
-                        itemAdded = true
-                        toastOpacity = 1.0
+                
+                    Picker("Input Type", selection: $typeOfInput) {
+                        Text("Conversion").tag("Conversion")
+                        Text("Appointment Count").tag("Appointment Count")
+                    }
+                    .pickerStyle(.menu)
+                
+                if typeOfInput == "Conversion" {
+                    Picker("Conversion Type", selection: $typeOfConversion) {
+                        Text("Accessory").tag("Accessory")
+                        Text("Trade-In").tag("Trade-In")
+                        Text("Upgrade").tag("Upgrade")
+                    }
+                    .pickerStyle(.palette)
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    
+                    TextField("Enter purchased item", text: $itemPurchased)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                        .autocorrectionDisabled(true)
+                        .focused($fieldIsFocused)
+                    
+                    Button("Add item") {
+                        fieldIsFocused = false
+                        if typeOfConversion == "Conversion Type" || itemPurchased.isEmpty {
+                            showError = true
+                            toastOpacity = 1.0
+                        } else {
+                            let newItem = Item(convType: typeOfConversion, itemName: itemPurchased, date: date)
+                            context.insert(newItem)
+                            print("Sold \(itemPurchased) in category \(typeOfConversion) on \(date)")
+                            itemPurchased = ""
+                            itemAdded = true
+                            toastOpacity = 1.0
+                        }
+                    }
+                } else {
+                    TextField("Enter number of Appointments", text: $numAppointments)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                        .keyboardType(.numberPad)
+                        .focused($fieldIsFocused)
+                        
+                    Button("Submit Appointment Number") {
+                        fieldIsFocused = false
+                        if numAppointments == "0" || numAppointments == "" {
+                            showError = true
+                            toastOpacity = 1.0
+                        } else {
+                            let newAppointmentCount = AppointmentCount(count: numAppointments, date: date)
+                            context.insert(newAppointmentCount)
+                            print("Took \(numAppointments) appointments on \(date)")
+                            numAppointments = ""
+                            itemAdded = true
+                            toastOpacity = 1.0
+                        }
                     }
                 }
+                
+                
             }
+            
             if showError {
                 ToastView(message: "Missing field/invalid selection", width: 400)
                     .opacity(toastOpacity)
@@ -78,6 +119,7 @@ struct InputView: View {
                     }
             }
         }
+        
     }
 }
 
