@@ -62,6 +62,10 @@ struct StatsView: View {
             
             ForEach(groupedByDate.keys.sorted(), id: \.self) { date in
                 Text(date)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 5, trailing: 20))
                      
                 ForEach(groupedByDate[date] ?? []) { item in
                     HStack {
@@ -72,7 +76,7 @@ struct StatsView: View {
                         Text(item.itemName)
                             .foregroundStyle(.primary)
                     }
-                    .padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
+                    .padding(EdgeInsets(top: 5, leading: 40, bottom: 5, trailing: 40))
                 }
             }
             Spacer()
